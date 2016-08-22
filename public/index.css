@@ -15,11 +15,12 @@ html,body {
 }
 
 #alt {
-	padding-top: 30px;
+
+	padding: 30px 30px 15px 30px; 
 }
 
 #mainstream {
-	padding-top: 30px;
+	padding: 30px 30px 15px 30px; 
 }
 
 #wrapper {
@@ -147,7 +148,7 @@ width: 100%;
 	text-align: center;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 730px) {
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -178,7 +179,7 @@ width: 100%;
 
 	}
 
-	@media (max-width: 505px) {
+	@media (max-width: 550px) {
 .button {
     background-color: #4CAF50; /* Green */
     border: 1px solid #4CAF50;
