@@ -7,10 +7,68 @@
 		<link rel="stylesheet" type="text/css" href="clouds.css">
 	<link rel="stylesheet" type="text/css" href="index.css">
 
+    <script src="/horizon/horizon.js"></script>
+    <script>
+      var horizon = Horizon();
+      horizon.onReady(function() {
+        const chat = horizon("messages"); // create or use the table 'messages'
+          const jingle = horizon("songs");
+        // Defined the object we want to store
+        // this could be anything
+        //
+        // String, number, boolean, date
+        //
+        // and objects... but they must use only the 4 types above
+
+        function addTrack(author, text) {
+          var tune = {
+            song: title,
+            datetime: new Date(),
+            artist: artist,
+          };
+          jingle.store(tune);
+        }
+// document.querySelector('#create').addEventListener('click', function() {        
 
 
-</head>
-<body>
+        function createMessage(author, text) {
+          var message = {
+            text: text,
+            datetime: new Date(),
+            author: author,
+          };
+          chat.store(message);
+        }
+        document.querySelector('#create').addEventListener('click', function() {
+          createMessage(document.querySelector('#chat-author').value, document.querySelector('#chat-text').value);
+        });
+        chat.order('datetime', 'descending').watch().subscribe(function(items) {
+          document.querySelector('#list');
+          // Clear the list
+          while (list.firstChild) {
+            list.removeChild(list.firstChild);
+          }
+          items.forEach(function(item) {
+            // Each result from the chat collection
+            //  will pass through this function
+            var listItem = document.createElement('div');
+            var listItemText = document.createTextNode(item.author + ': ' + item.text);
+            listItem.appendChild(listItemText);
+            list.appendChild(listItem);
+            console.log(item);
+          })
+        },
+          // If an error occurs, this function
+          //  will execute with the `err` message
+        function(err) {
+          console.log(err);
+        })
+      });
+      horizon.connect();
+    </script>
+  </head>
+  <body>
+
 
 <div id="wrapper">
     <div id="a" class="panels">
@@ -18,6 +76,14 @@
     		<div class="tiki">
 
 				<div id="bpm">BPM Counter: Tap any key to the beat to find tempo</div>
+   <marquee><h1></h1></marquee>
+        <div id="root">
+       <div id="list">
+       </div>
+     </div>
+     <input type="text" name="author" id="chat-author" value="Jim" />
+     <input type="text" name="text" id="chat-text" />
+     <input type="button" value="Create message" id="create" />
 				<div class="buttontop">
 				<button id="popbutton">POP</button>
 				<button id="altbutton">alt</button>
@@ -93,15 +159,22 @@ $.getJSON( "/underground", function( data ) {
 	}).then(function(embed){
   		console.log('oEmbed response: ', embed.html);
   		$(embed.html).appendTo("#alt");
-  		$('<button class="buttonSC" type="button">Add to List</button>' + '<button class="buttonSC" type="button">Download Track</button>').appendTo("#alt");
+  		$('<button class="buttonSC" type="button" onClick="addToList({ type:\'soundcloud\',id:' +val.origin.id+',title: \''+val.origin.title+'\',artist:\''+val.origin.user.username+'\',permalink_url:\''+val.origin.permalink_url+'\'})">Add to List</button>' + '<button class="buttonSC" type="button">Download Track</button>').appendTo("#alt");
 	});
   });
  
   // $( "<ul/>", {
   //   "class": "my-new-list",
   //   html: items.join( "" )
-  // }).appendTo( "#alt" );
+  // }).appendTo( "#create" );
 });
+
+function addToList (obj) {
+	console.log(obj);
+	var soundcloudSongs = obj;
+
+}
+
 </script>
 
 <script type="text/javascript">
@@ -117,16 +190,21 @@ $.getJSON( "/underground", function( data ) {
 $.getJSON( "/mainstream", function( data ) {
 	console.log(data.items);
 	var spotifyTracks = data.items.map( function (item ) {
-		var iframe=$( '<iframe src="https://embed.spotify.com/?uri=' + encodeURI(item.track.uri) +'" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>' + '<div class="button-container">' + '<button class="button" type="button">Add to List</button>' + '<a href="http://itunes.com/'+encodeURIComponent(item.track.artists[0].name.replace(/\s/g, ''))+'/'+encodeURIComponent(item.track.name.replace(/\s/g, ''))+' " class="button" target="_blank" type="button">Download Track</a>' + '</div>')
+		var iframe=$( '<iframe src="https://embed.spotify.com/?uri=' + encodeURI(item.track.uri) +'" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>' + '<div class="button-container">' + '<button class="button" type="button" onClick="addToLister({ type:\'spotify\', id: \''+item.track.id+'\',title: \''+item.track.name+'\',artist:\''+item.track.artists[0].name+'\',permalink_url:\''+item.track.preview_url+'\'})">Add to List</button>' + '<a href="http://itunes.com/'+encodeURIComponent(item.track.artists[0].name.replace(/\s/g, ''))+'/'+encodeURIComponent(item.track.name.replace(/\s/g, ''))+' " class="button" target="_blank" type="button">Download Track</a>' + '</div>')
 		iframe.appendTo("#mainstream");
 		return item.track.name
 	});
 console.log(spotifyTracks)
+
 });
+
+function addToLister (obj) {
+	console.log(obj);
+}
 
 </script>
 
-
+<!-- ,id:'+item.track.id+',title: \''+item.track.name+'\',artist:\''+item.track.artists[0].name+'\',permalink_url:\''+item.track.preview_url+'\' -->
 
 </body>
 </html>

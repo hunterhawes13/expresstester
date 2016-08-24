@@ -1,3 +1,4 @@
+const horizon = require('@horizon/server');
 var express = require('express');
 var app = express();
 
@@ -40,7 +41,7 @@ request.post(authOptions, function(error, response, body) {
     // use the access token to access the Spotify Web API
     var token = body.access_token;
     var options = {
-      url: 'https://api.spotify.com/v1/users/spotify/playlists/5zRlalcDw1qdHLc3lqfmHp/tracks?limit=5',
+      url: 'https://api.spotify.com/v1/users/spotify/playlists/5zRlalcDw1qdHLc3lqfmHp/tracks?limit=1',
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -82,7 +83,7 @@ app.get('/underground', function (req, res) {
 	  // we need to create a new client object which will use the access token now
 	  var clientnew = sc.client({access_token : access_token});
 
-	  clientnew.get('/me/activities/tracks/affiliated', {limit : 5}, function(err, result) {
+	  clientnew.get('/me/activities/tracks/affiliated', {limit : 1}, function(err, result) {
 	    if (err) console.error(err);
 	    res.json(result) // should show a json object of your soundcloud user
 	  });
@@ -95,6 +96,23 @@ app.get('/underground', function (req, res) {
 
 app.use(express.static('public'));
 
-app.listen(3000, function () {
+var httpServer = app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
+
+const options = {
+  auth: {
+    token_secret: "dsMZF6eNr6WIC1Uhg0nNK56GFFaBo+XC43FtW5AlqKgYX0WCSderHiJmf84B78B9CopCp3qVR6n2p3dFOEuxlQ==",
+    allow_anonymous: true, // harden, horizon
+    allow_unauthenticated: true, // harden, horizon
+
+  },
+  auto_create_collection: true, // TODO: harden, dokku/rethink
+  auto_create_index: true, // TODO: harden, dokku/rethink
+  permissions: false,
+  project_name: 'expresstester',
+  // rdb_host: "0.0.0.0",
+  rdb_port: 28015
+};
+console.log('starting horizon with ' + options);
+const horizonServer = horizon(httpServer, options);
