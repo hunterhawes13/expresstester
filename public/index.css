@@ -14,6 +14,26 @@ html,body {
     background:#456BD9;
 }
 
+iframe {
+    padding-top: 100px;
+}
+
+footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:white;
+   z-index: 2100
+}
+
+#list {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+        text-shadow: 1px 1px 1px #000;
+}
+
 #alt {
 
 	padding: 30px 30px 15px 30px; 
@@ -42,6 +62,7 @@ html,body {
     position:fixed;
     top:0;
     z-index:-99;
+/*  transform: translateZ(-2px) scale(1.2);*/
 }
 
 #b{
@@ -52,22 +73,36 @@ margin-top: 50%;
 
 #cloudsimage {
 	position: absolute;
-	background-image: url("http://i.imgur.com/UqrlSAv.png");
+	background-image: url("http://i.imgur.com/N1fLXgj.png");
 	top: -65px;
 	height: 200px;
     background-repeat: repeat-x;
         width: 100%;
+
+
+}
+
+#cloudsimage2 {
+    position: absolute;
+    background-image: url("http://i.imgur.com/N1fLXgj.png");
+    top: -68px;
+    height: 200px;
+    background-repeat: repeat-x;
+        width: 100%;
+        z-index:3000;
+  zoom: 110%;
+
 }
 
 
 
 #bpm {
 
-	color: white;
+color: #456BD9
 	text-shadow: 1px 1px 1px #000;
 	font-family: arial;
 	text-align: center;
-	width: 300px;
+	width: 100%;
 	margin: 0 auto;
 
 }

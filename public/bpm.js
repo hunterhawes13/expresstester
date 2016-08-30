@@ -19,7 +19,7 @@ function bpm(){
         average = ~~(60/minute)
 
         var node = document.getElementById("bpm");
-        node.innerHTML = average;
+        node.innerHTML = average + " Beats Per Minute";
 
 
 
