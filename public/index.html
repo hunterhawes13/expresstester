@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Press+Start+2P" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="clouds.css">
@@ -75,15 +76,25 @@
           items.forEach(function(item) { 
             // Each result from the chat collection
             //  will pass through this function
+            var listButton = document.createElement('button');
+            listButton.className = "delete";
+            // listButton.id = item.id;
             var listItem = document.createElement('div');
-            var listItemText = document.createTextNode(item.title + ': ' + item.artist);
-            listItem.appendChild(listItemText);
+            listItem.className = "songs";
+            var listItemText = document.createTextNode(item.artist + ': ' + item.title);
+    		var nameLinkNode = document.createElement('a'); 
+    	nameLinkNode.setAttribute('href', 'https://itunes.com/' + encodeURIComponent(item.artist.replace(/\s/g, '')) + '/' + encodeURIComponent(item.title.replace(/\s/g, '')));
+    nameLinkNode.appendChild(listItemText);
+            listItem.appendChild(nameLinkNode);
+            // listButton.appendChild(listItem);
+            // listItem.appendChild(listButton);
             list.appendChild(listItem);
+
             console.log(item);
           })
         },
           // If an error occurs, this function
-          //  will execute with the `err` message
+          //  will execute with the `err` message.replace(/\s/g, '')
         function(err) {
           console.log(err);
         })
@@ -93,7 +104,25 @@
     </script>
   </head>
   <body>
-
+<!--       <div id="overlay"></div>
+<style>
+    #overlay {
+        position: fixed;
+        background: rgba(0,0,0,0.8);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+    .hide {
+        display: none;
+    }
+</style>
+<script>
+    $(window).load(function() {
+     $('#overlay').addClass('hide');
+    });
+</script> -->
 
 <div id="wrapper">
     <div id="a" class="panels">
@@ -106,9 +135,7 @@
 				<div class="buttontop">
 				<button id="popbutton">POP</button>
 				<button id="altbutton">alt</button>
-				        <div id="root">
-        <div id="hider"><br></div>
-       <div id="list">
+
 
 
        </div>
@@ -130,8 +157,18 @@
     <div id="cloudsimage" class="absolute"></div>
 	<div id="alt"></div>
 	<div id="mainstream"></div>
-<footer>		    <div id="cloudsimage2" class="absolute2"></div>		<div id="bpm">BPM Counter: Tap any key to the beat to find tempo</div></footer>
-</div>
+	<div id="white"></div>
+    <div id="cloudsimage3" class="absolute"></div>
+<footer>		    
+       		<div id="cloudsimage2" class="absolute2"></div>
+	<div id="bpm">BPM Counter: Tap any key to the beat to find tempo</div>
+	<button id="clickme">See List</button>      
+		<div id="root">
+        	<div id="hider"><br></div>
+       	<div id="list">	</div>
+
+</footer>
+
 
 <!-- <div class="clouds"></div> -->
 <!-- <span class="mains">mainstream </span><span class="altfont"> ALT</span> 
@@ -152,24 +189,59 @@
 <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <script src="bpm.js"></script>
 <script>
+
+
 $(document).ready(function(){
     $("#popbutton").click(function(){
         $("#alt").hide();
-        $("#mainstream").show();
+        // $("#mainstream").show();
     });
     $("#altbutton").click(function(){
          $("#mainstream").hide();
-        $("#alt").show();
+        // $("#alt").show();
     });
 });
-$(document).ready(function(){
-    $("#list").click(function(){
-         $("#list").toggle();
-        $("#hider").click(function(){
+// $(document).ready(function(){
+//     $("#clickme").click(function(){
+//          $("#list").toggle();
 
-        $("#list").show();
-    });     
-    });
+//     });
+// });
+
+$( "#popbutton" ).click(function() {
+  $( "#mainstream" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+    $( "#white" ).show();
+        $( "#cloudsimage" ).show();
+                $("#alt").hide();
+                $( "#cloudsimage3" ).show();
+                $('#mainstream').animate({
+        'marginTop' : "-=80px" //moves up
+        });
+
+});
+
+$("#altbutton").click(function() {
+  $( "#alt"  ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
+    $( "#white" ).show();
+        $( "#cloudsimage" ).show();
+                $("#mainstream").hide();
+                        $( "#cloudsimage3" ).show();
+                                        $('#alt').animate({
+        'marginTop' : "-=75px" //moves up
+        });
+
+     
+});
+
+
+$( "#clickme" ).click(function() {
+  $( "#list" ).slideToggle( "slow", function() {
+    // Animation complete.
+  });
 });
 
 

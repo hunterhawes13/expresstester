@@ -1,3 +1,5 @@
+
+
 body {
  font-size: 18px;
 
@@ -18,30 +20,83 @@ iframe {
     padding-top: 100px;
 }
 
+@media (max-width: 530px) {
+    iframe {
+    padding-top: 20px;
+}
+}
+
 footer {
    position:fixed;
    left:0px;
    bottom:0px;
-   height:30px;
+
    width:100%;
    background:white;
    z-index: 2100
 }
 
+.songs {
+    padding-top: 5px;
+}
+
+#white {
+    background-color: white;
+    height:100px;
+    display: none;
+}
+
+a:link {
+    color: #456BD9;
+
+}
+
+/* visited link */
+a:visited {
+    color: #838faf;
+}
+
+/* mouse over link */
+a:hover {
+
+        color: #96b0f7;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+
 #list {
     color: white;
     font-family: 'Montserrat', sans-serif;
-        text-shadow: 1px 1px 1px #000;
+
+        display:none;
+        padding: 2px 2px 2px 2px;
 }
 
 #alt {
-
+    display:none; 
 	padding: 30px 30px 15px 30px; 
 }
 
 #mainstream {
-	padding: 30px 30px 15px 30px; 
+	padding: 30px 30px 15px 30px;
+    display:none; 
 }
+
+@media (max-width: 730px) {
+
+    #alt {
+
+    padding: 10px 10px 5px 10px; 
+}
+
+#mainstream {
+    padding: 10px 10px 5px 10px; 
+}
+}
+
 
 #wrapper {
     position:absolute;
@@ -71,13 +126,23 @@ margin-top: 50%;
 
 }
 
+@media (max-width: 530px) {
+  #b {  margin-top: 125%;
+    
+    }
+    #bpm {
+        font-size: 12px;
+    }
+}
+
 #cloudsimage {
 	position: absolute;
 	background-image: url("http://i.imgur.com/N1fLXgj.png");
-	top: -65px;
-	height: 200px;
+	top: -69px;
+	height: 69px;
     background-repeat: repeat-x;
         width: 100%;
+        display: none;
 
 
 }
@@ -85,17 +150,33 @@ margin-top: 50%;
 #cloudsimage2 {
     position: absolute;
     background-image: url("http://i.imgur.com/N1fLXgj.png");
-    top: -68px;
-    height: 200px;
+    top:-69px;
+    height: 69px;
     background-repeat: repeat-x;
         width: 100%;
-        z-index:3000;
   zoom: 110%;
+
+}
+
+#cloudsimage3 {
+    position: absolute;
+    background-image: url("http://i.imgur.com/z6BQ4Hu.png");
+    bottom: -69px;
+    height: 69px;
+    background-repeat: repeat-x;
+        width: 100%;
+        display: none;
+
 
 }
 
 
 
+#clickme{
+
+    z-index: 7000;
+    cursor: pointer;
+}
 #bpm {
 
 color: #456BD9
@@ -766,7 +847,165 @@ a.button:hover {
        text-shadow: 1px 1px 1px #000;
     }
 }
+#clickme{
+        border: 1px solid black;
+    background-color: #c2d1fc; 
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 36px;
+    margin: 0 auto;
+    display: block;
+    width: 49%;
+    height: 100px;
+    text-shadow: 1px 1px 1px #000;
+font-family: 'Montserrat', sans-serif;
+ border-radius: 25px;
 
+}
+
+#clickme:hover {
+    background-color: #456bd9; 
+    border: 1px solid black;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 36px;
+
+        cursor: pointer;
+        text-shadow: 1px 1px 1px #000;
+}
+
+.button-container {
+
+    text-align: center;
+}
+
+@media (max-width: 850px) {
+#clickme {
+
+
+    color: white;
+
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 24px;
+    margin: 0 auto; 
+    text-shadow: 1px 1px 1px #000;
+
+}
+
+#clickme:hover {
+
+    border: 1px solid black;
+    color: white;
+
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 24px;
+    margin: 0 auto;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #000;
+}
+
+    }
+
+@media (max-width: 700px) {
+#clickme {
+  
+    color: white;
+    padding: 4px 24px;
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 28px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 1px #000;    
+}
+
+#clickme:hover {
+    
+    border: 1px solid black;
+    color: white;
+    padding: 4px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 28px;
+    margin: 0 auto;
+        cursor: pointer;
+        text-shadow: 1px 1px 1px #000;
+}
+
+    }
+
+    @media (max-width: 627px) {
+#clickme {
+
+    color: white;
+    padding: 8px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 2px 2px 2px 2px;
+    width: 100%;
+    height: 100px;
+    cursor: pointer;
+            text-shadow: 1px 1px 1px #000;
+
+}
+
+#clickme:hover {
+
+    border: 1px solid black;
+    color: white;
+    padding: 8px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 2px 2px 2px 2px;
+        cursor: pointer;
+        text-shadow: 1px 1px 1px #000;
+}
+}
+
+    @media (max-width: 420px) {
+#clickme {
+
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px 12px 2px;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+            text-shadow: 1px 1px 1px #000;
+
+}
+
+#clickme:hover {
+
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 2px 12px 2px;
+        cursor: pointer;
+        text-shadow: 1px 1px 1px #000;
+
+
+}
+}
 
 /*
 @media only screen  and (min-width : 2324px) {

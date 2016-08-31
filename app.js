@@ -41,7 +41,7 @@ request.post(authOptions, function(error, response, body) {
     // use the access token to access the Spotify Web API
     var token = body.access_token;
     var options = {
-      url: 'https://api.spotify.com/v1/users/spotify/playlists/5zRlalcDw1qdHLc3lqfmHp/tracks?limit=6',
+      url: 'https://api.spotify.com/v1/users/spotify/playlists/5zRlalcDw1qdHLc3lqfmHp/tracks?limit=5',
       headers: {
         'Authorization': 'Bearer ' + token
       },
@@ -83,7 +83,7 @@ app.get('/underground', function (req, res) {
 	  // we need to create a new client object which will use the access token now
 	  var clientnew = sc.client({access_token : access_token});
 
-	  clientnew.get('/me/activities/tracks/affiliated', {limit : 3}, function(err, result) {
+	  clientnew.get('/me/activities/tracks/affiliated', {limit : 5}, function(err, result) {
 	    if (err) console.error(err);
 	    res.json(result) // should show a json object of your soundcloud user
 	  });
