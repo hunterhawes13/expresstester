@@ -74,24 +74,42 @@
             list.removeChild(list.firstChild);
           }
           items.forEach(function(item) { 
-            // Each result from the chat collection
+            // Each result from the song collection
             //  will pass through this function
-            var listButton = document.createElement('button');
+                var listButton = document.createElement('button');
             listButton.className = "delete";
-            // listButton.id = item.id;
+            listButton.id = item.id;
+            listButton.source = item.type;
+            listButton.addEventListener('click', function (e) {
+                console.log(e.target.source)
+                if (e.target.source === "soundcloud") {
+                    jingle.remove(parseInt(e.target.id,10))
+                } else {
+
+                    jingle.remove(e.target.id)
+                }
+            })
+
             var listItem = document.createElement('div');
-            listItem.className = "songs";
-            var listItemText = document.createTextNode(item.artist + ': ' + item.title);
+            listItem.className = "songs"; // <div class="songs">≈</div>
+
+            var listItemText = document.createTextNode(item.artist.replace(/\s/g, '') + ': ' + item.title.replace(/\s/g, ''));
     		var nameLinkNode = document.createElement('a'); 
-    	nameLinkNode.setAttribute('href', 'https://itunes.com/' + encodeURIComponent(item.artist.replace(/\s/g, '')) + '/' + encodeURIComponent(item.title.replace(/\s/g, '')));
-    nameLinkNode.appendChild(listItemText);
+    		nameLinkNode.setAttribute('href', 'https://itunes.com/' + encodeURIComponent(item.artist.replace(/\s/g, '')) + '/' + encodeURIComponent(item.title.replace(/\s/g, ''))); // 
+    		listItem.appendChild(listButton);
+    		nameLinkNode.appendChild(listItemText);
             listItem.appendChild(nameLinkNode);
-            // listButton.appendChild(listItem);
-            // listItem.appendChild(listButton);
             list.appendChild(listItem);
 
             console.log(item);
+
+  // function handleDelete(id, e) {
+  //     item.remove(id)
+  //   }
           })
+
+
+
         },
           // If an error occurs, this function
           //  will execute with the `err` message.replace(/\s/g, '')
@@ -214,25 +232,42 @@ $( "#popbutton" ).click(function() {
   });
     $( "#white" ).show();
         $( "#cloudsimage" ).show();
-                $("#alt").hide();
-                $( "#cloudsimage3" ).show();
-                $('#mainstream').animate({
+        $("#alt").hide();
+        $( "#cloudsimage3" ).show();
+        $('#mainstream').animate({
         'marginTop' : "-=80px" //moves up
         });
+
+        function exploder(){
+        $('#mainstream').animate({
+        'marginTop' : "+=80px" //moves down
+
+        });
+}
+setTimeout(exploder, 1000);
 
 });
 
 $("#altbutton").click(function() {
+
   $( "#alt"  ).slideToggle( "slow", function() {
     // Animation complete.
   });
     $( "#white" ).show();
         $( "#cloudsimage" ).show();
-                $("#mainstream").hide();
-                        $( "#cloudsimage3" ).show();
-                                        $('#alt').animate({
+        $("#mainstream").hide();
+        $( "#cloudsimage3" ).show();
+        $('#alt').animate({
         'marginTop' : "-=75px" //moves up
         });
+
+        function explode(){
+        $('#alt').animate({
+        'marginTop' : "+=75px" //moves down
+
+        });
+}
+setTimeout(explode, 1000);
 
      
 });
@@ -271,12 +306,14 @@ $.getJSON( "/underground", function( data ) {
 // $('iframe, </button>').wrapAll('<div class="scFrame" />');
   		$(embed.html).appendTo("#alt");
   		$('<button class="buttonSC" id='+val.origin.id+' type="button" onClick="addToList({ type:\'soundcloud\',id:' +val.origin.id+',title: \''+val.origin.title+'\',artist:\''+val.origin.user.username+'\',datetime:\''+new Date()+'\',permalink_url:\''+val.origin.permalink_url+'\'})">Add to List</button>' + '<button class="buttonSC" type="button">Download Track</button>').appendTo("#alt");
+ // class="buttonSC" type="button">Download Track</button>').appendTo("#alt");
 	});
   });
  
   // $( "<ul/>", {
   //   "class": "my-new-list",
   //   html: items.join( "" )
+  // '<a href='+val.origin.permalink_url+'/download' + 'class="buttonSC" target="_blank" type="button">Download Track</a>'
   // }).appendTo( "#create" );
 });
 

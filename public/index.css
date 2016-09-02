@@ -24,6 +24,18 @@ iframe {
     iframe {
     padding-top: 20px;
 }
+
+.songs {
+    font-size: 14px;
+  
+}
+
+}
+
+.delete {
+    width: 18px;
+  margin-right:5px; 
+
 }
 
 footer {
@@ -753,6 +765,9 @@ a.button:hover {
     margin: 2px 2px 2px 2px;
         cursor: pointer;
        text-shadow: 1px 1px 1px #000;
+               text-align:center;
+        vertical-align:top;
+     line-height:100px;
     }
 }
 
@@ -924,7 +939,7 @@ font-family: 'Montserrat', sans-serif;
     text-align: center;
     text-decoration: none;
 
-    font-size: 28px;
+    font-size: 24px;
     margin: 0 auto;
     text-shadow: 1px 1px 1px #000;    
 }
@@ -936,7 +951,7 @@ font-family: 'Montserrat', sans-serif;
     padding: 4px 24px;
     text-align: center;
     text-decoration: none;
-    font-size: 28px;
+    font-size: 24px;
     margin: 0 auto;
         cursor: pointer;
         text-shadow: 1px 1px 1px #000;
