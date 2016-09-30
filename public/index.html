@@ -295,14 +295,14 @@ $( "#clickme" ).click(function() {
 <script type="text/javascript">
 
 $.getJSON( "/underground", function( data ) {
-	console.log(data.collection);
+	//console.log(data.collection);
   var items = [];
   $.each( data.collection, function( key, val ) {
     // items.push( "<li id='" + key + "'>" + val.origin.title + "</li>" );
     SC.oEmbed(val.origin.permalink_url, {
  	 auto_play: false 
 	}).then(function(embed){
-  		console.log('oEmbed response: ', embed.html);
+  	//	console.log('oEmbed response: ', embed.html);
 // $('iframe, </button>').wrapAll('<div class="scFrame" />');
   		$(embed.html).appendTo("#alt");
   		$('<button class="buttonSC" id='+val.origin.id+' type="button" onClick="addToList({ type:\'soundcloud\',id:' +val.origin.id+',title: \''+val.origin.title+'\',artist:\''+val.origin.user.username+'\',datetime:\''+new Date()+'\',permalink_url:\''+val.origin.permalink_url+'\'})">Add to List</button>' + '<button class="buttonSC" type="button">Download Track</button>').appendTo("#alt");
@@ -318,7 +318,7 @@ $.getJSON( "/underground", function( data ) {
 });
 
 function addToList (obj) {
-	console.log(obj);
+	//console.log(obj);
 
         jingle.store(obj);
 
@@ -326,19 +326,19 @@ function addToList (obj) {
 
 // spotifyApi.getPlaylist('spotify', '2qlMTcW6AnnaGl7eXWAZP5')
 //   .then(function(data) {
-//     console.log('Some information about this playlist', data.body);
+//     //console.log('Some information about this playlist', data.body);
 //   }, function(err) {
-//     console.log('Something went wrong!', err);
+//     //console.log('Something went wrong!', err);
 //   });
 
 $.getJSON( "/mainstream", function( data ) {
-	console.log(data.items);
+	//console.log(data.items);
 	var spotifyTracks = data.items.map( function (item ) {
 		var iframe=$( '<iframe src="https://embed.spotify.com/?uri=' + encodeURI(item.track.uri) +'" width="100%" height="380" frameborder="0" allowtransparency="true"></iframe>' + '<div class="button-container">' + '<button class="button" type="button" id='+item.track.id+' onClick="addToList({ type:\'spotify\', id: \''+item.track.id+'\',title: \''+item.track.name+'\',artist:\''+item.track.artists[0].name+'\',datetime:\''+new Date()+'\',permalink_url:\''+item.track.preview_url+'\'})">Add to List</button>' + '<a href="http://itunes.com/'+encodeURIComponent(item.track.artists[0].name.replace(/\s/g, ''))+'/'+encodeURIComponent(item.track.name.replace(/\s/g, ''))+' " class="button" target="_blank" type="button">Download Track</a>' + '</div>')
 		iframe.appendTo("#mainstream");
 		return item.track.name
 	});
-console.log(spotifyTracks)
+//console.log(spotifyTracks)
 
 });
 
